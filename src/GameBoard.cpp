@@ -31,12 +31,18 @@ int GameBoard::move(Direction direction) {
     // Slide and merge, anyother?
     // TODO 1
     int score = 0;
-    score = merge(direction);
+    int isZero = 0;   //判断是否还有空位
     slide(direction);
+    score = merge(direction);
+    for (int i = 0; i < 4;i++)
+        for (int j = 0; j < 4;j++)
+            if(board[i][j]==0)
+                isZero = 1;
+    if(isZero==1){
     // Add a new tile after every move
     // You can refer to the reset() function to see how to add a new tile
     // TODO 2
-    std::uniform_int_distribution<int> dist(0, 3);  // [0, 3] uniform distribution
+    std::uniform_int_distribution<int> dist(0, 3); // [0, 3] uniform distribution
     std::uniform_int_distribution<int> value_dist(0, 1);
     int x = dist(generator);
     int y = dist(generator);
@@ -45,6 +51,7 @@ int GameBoard::move(Direction direction) {
         y = dist(generator);
     }
     board[x][y] = (value_dist(generator) + 1) * 2; // Place either a 2 or a 4
+    }
     return score;
 }
 
@@ -81,8 +88,8 @@ void GameBoard::slide(Direction direction) {
                 int target = 0;
                 for (int col = 0; col < 4; ++col) {
                     if (board[row][col] != 0) {
-                        std::swap(board[target][col], board[row][col]);
-                        if (target != row) board[row][col] = 0;
+                        std::swap(board[row][target], board[row][col]);
+                        if (target != col) board[row][col] = 0;
                         ++target;
                     }
                 }
@@ -94,8 +101,8 @@ void GameBoard::slide(Direction direction) {
                 int target = 3;
                 for (int col = 3; col >= 0; --col) {
                     if (board[row][col] != 0) {
-                        std::swap(board[target][col], board[row][col]);
-                        if (target != row) board[row][col] = 0;
+                        std::swap(board[row][target], board[row][col]);
+                        if (target != col) board[row][col] = 0;
                         --target;
                     }
                 }
@@ -133,18 +140,6 @@ int GameBoard::merge(Direction direction) {
         case Direction::LEFT:
             // TODO
             for (int row = 0; row < 4; ++row) {
-                for (int col = 3; col > 0; --col) {
-                    if (board[row][col] != 0 && board[row][col] == board[row][col - 1]) {
-                        board[row][col] *= 2;
-                        moveScore += board[row][col];
-                        board[row][col - 1] = 0;
-                    }
-                }
-            }
-            break;
-        case Direction::RIGHT:
-            // TODO
-             for (int row = 0; row < 4; ++row) {
                 for (int col = 0; col < 3; ++col) {
                     if (board[row][col] != 0 && board[row][col] == board[row][col + 1]) {
                         board[row][col] *= 2;
@@ -154,8 +149,19 @@ int GameBoard::merge(Direction direction) {
                 }
             }
             break;
+        case Direction::RIGHT:
+            // TODO
+             for (int row = 0; row < 4; ++row) {
+                for (int col = 3; col > 0; --col) {
+                    if (board[row][col] != 0 && board[row][col] == board[row][col - 1]) {
+                        board[row][col] *= 2;
+                        moveScore += board[row][col];
+                        board[row][col - 1] = 0;
+                    }
+                }
+            }
+            break;
     }
-
     return moveScore;
 }
 
@@ -171,20 +177,12 @@ bool GameBoard::isGameOver() const {
     }
     // Check if any adjacent tiles can merge
     // TODO
-    int rowbefore, rownext, colbefore, colnext;
     for (int row = 0; row < 4; ++row) {
         for (int col = 0; col < 4; ++col) {
-            rowbefore = row - 1;
-            if(rowbefore<0)rowbefore = 0;                
-            rownext = row + 1;
-            if(rownext>3)rownext = 3;  
-            colbefore = col - 1;
-            if(colbefore<0)colbefore = 0;   
-            colnext = col + 1;
-            if(colnext>3)colnext = 3;  
-            if(board[row][col]==board[rowbefore][col]||board[row][col]==board[rownext][col]||board[row][col]==board[row][colbefore]||board[row][col]==board[row=][colnext]){
-                return false;
-            }
+            if(row!=0&&board[row][col]==board[row-1][col])return false;
+            if(row!=3&&board[row][col]==board[row+1][col])return false;
+            if(col!=0&&board[row][col]==board[row][col-1])return false;
+            if(col!=3&&board[row][col]==board[row][col+1])return false;    
         }
     }
     return true;

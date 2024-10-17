@@ -1,0 +1,3 @@
+D:/MYPC/VSCode/Project/2028game/build/CMakeFiles/2048.dir
+D:/MYPC/VSCode/Project/2028game/build/CMakeFiles/ALL_BUILD.dir
+D:/MYPC/VSCode/Project/2028game/build/CMakeFiles/ZERO_CHECK.dir

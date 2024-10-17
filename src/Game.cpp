@@ -27,10 +27,12 @@ void Game::undoLastMove() {
     if (historyGameBoards.size() > 1) {
         // Remove current state
         // TODO 1
+        gameBoard = historyGameBoards.top();
+        moveCount--;
         historyGameBoards.pop();
         // Restore previous state
         // TODO 2
-        gameBoard = historyGameBoards.top();
+       
     } else {
         gameBoard.reset();
     }

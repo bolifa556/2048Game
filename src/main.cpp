@@ -84,6 +84,7 @@ int main(){
     // Display elapsed time
     // TODO
     TerminalRender::displayElapsedTime(game.getElapsedTime());
+    system("pause");
     return 0;
 }
 

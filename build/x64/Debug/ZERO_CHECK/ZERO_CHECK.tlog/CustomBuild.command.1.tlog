@@ -1,0 +1,10 @@
+^D:\MYPC\VSCODE\PROJECT\2028GAME\BUILD\CMAKEFILES\8745F8F750434BE8B8AFC6962721D5D9\GENERATE.STAMP.RULE
+setlocal
+D:\MYPC\VS2019\VS2019\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe -SD:/MYPC/VSCode/Project/2028game -BD:/MYPC/VSCode/Project/2028game/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/MYPC/VSCode/Project/2028game/build/2048.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

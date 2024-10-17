@@ -1,5 +1,6 @@
 #include "../include/InputHandler.h"
 #include <conio.h> // For _getch()
+#include "cctype"
 
 InputType InputHandler::handleInput() {
     while (true) {

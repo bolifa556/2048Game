@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\MYPC\VSCode\Project\2028game\build\CMakeFiles\8745f8f750434be8b8afc6962721d5d9\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{C18CAF7B-0584-3D2F-97A9-D5B9D301EBE5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
